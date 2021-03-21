@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/colorsFragment">
+    app:startDestination="@id/colors_fragment">
 
     <fragment
-        android:id="@+id/colorsFragment"
+        android:id="@+id/colors_fragment"
         android:name="com.example.colors44.ColorsFragment"
         android:label="Colors"
         tools:layout="@layout/fragment_colors" />
     <fragment
-        android:id="@+id/qwizzFragment"
+        android:id="@+id/qwizz_fragment"
         android:name="com.example.colors44.QwizzFragment"
         android:label="Qwizz"
         tools:layout="@layout/fragment_qwizz" />

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/colorsFragment"
+        android:id="@+id/colors_fragment"
         android:title="Colors"
         android:icon="@drawable/ic_baseline_colorize_24"/>
 
     <item
-        android:id="@+id/qwizzFragment"
+        android:id="@+id/qwizz_fragment"
         android:title="Qwizz"
         android:icon="@drawable/ic_baseline_check_circle_24"/>
 

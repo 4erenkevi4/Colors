@@ -1,61 +1,68 @@
 package com.example.colors44
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val COLOR = "Цвет"
+private const val NAME = "Название"
+private var i = 0
+private var b = 1
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QwizzFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class QwizzFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var itColor: Int? = null
+    private var itNameColor: Int? = null
+    private var folsColor: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            itColor = it.getInt(COLOR)
+            itNameColor = randomColor()
+            folsColor = randomColor()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_qwizz, container, false)
+        (requireActivity() as ReplaceInterface).firstReplace()
+        var root: View = inflater.inflate(R.layout.fragment_qwizz, container, false)
+        root.findViewById<TextView>(R.id.color_one).text = itNameColor.toString()
+        root.findViewById<TextView>(R.id.color_two).text = folsColor.toString()
+        root.findViewById<View>(R.id.container_color).setBackgroundColor(randomColor())
+        return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        view?.findViewById<TextView>(R.id.color_one)?.setOnClickListener {
+            (requireActivity() as ReplaceInterface).nextReplace(i + b, true)
+            i++
+        }
+        view?.findViewById<TextView>(R.id.color_two)?.setOnClickListener {
+            (requireActivity() as ReplaceInterface).nextReplace(i + b, false)
+            i++
+        }
+    }
+
+    fun randomColor(): Int {
+        val rnd = Random()
+        val colorRandom = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+        return colorRandom
+    }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QwizzFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QwizzFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        fun newInstance(color: Int) =
+                QwizzFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt(COLOR, color)
+                        putInt(NAME, color)
+                    }
                 }
-            }
     }
-
 }
